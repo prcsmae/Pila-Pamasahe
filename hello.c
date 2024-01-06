@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+void printReceipt();
+
 struct fareInfo {
 	char startPoint[50];
 	char endPoint[50];
@@ -15,4 +17,8 @@ int main(){
     struct FareInfo airconJeepney = {"Point A", "Point B", 15, 1.80}; // initialize variables
     
     return 0;
+}
+
+void printReceipt(){
+	
 }
