@@ -21,7 +21,7 @@ float calculateFare( float Users_Distance_From_A_To_B, float baseFare, float add
     }
 	
 // Applying discounts if the user is eligible for discount(PWD, Students, Senior Citizen)   
-    if (PWD_Discount, SeniorCitizen_Discount, Student_Discount){
+    if (PWD, SeniorCitizen, Student){
          final_fare *= 0.8;
     }
 
