@@ -10,6 +10,7 @@ struct fareInfo {
 };
 
 int main(){
+
     struct FareInfo regularJeepney = {"Point A", "Point B", 13, 1.80}; // initialize variables
     struct FareInfo airconJeepney = {"Point A", "Point B", 15, 1.80}; // initialize variables
     
