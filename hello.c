@@ -41,7 +41,7 @@ struct fareInfo Davao_Fares[2];
     Davao_Fares[1].baseFare = 15.0;
     Davao_Fares[1].additional = 1.80;
 
-        DifferentType_Of_Jeep_Fare(Davao_Fares, 2); */
+        DifferentType_Of_Jeep_Fare(Davao_Fares, 2); 
     
     return 0;
 }
