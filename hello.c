@@ -8,6 +8,25 @@ struct fareInfo {
 	double baseFare;
 	double additional;
 };
+float calculateFare( double baseFare, double additional, int PWD_Discount, int SeniorCitizen_Discount, int Student_Discount) {
+    float result = baseFare - 4.0;
+    float final_fare;
+
+    if (result == 0) {
+        final_fare = baseFare;
+    } else if (result > 1) {
+        float additional_fare = result * 1.80;
+        final_fare = baseFare + additional_fare;
+    } else {
+        final_fare = baseFare;
+    }
+
+    if (PWD_Discount, SeniorCitizen_Discount, Student_Discount){
+         final_fare *= 0.8;
+    }
+
+    return final_fare;
+}
 
 int main(){
 
