@@ -39,15 +39,15 @@ int main(){
     struct FareInfo airconJeepney = {"Point A", "Point B", 15, 1.80}; // initialize variables
 	
 	// Then ganito natin pag use sa struct para isa nalang function for regular and aircon na jeep
-	/* struct fareInfo DavaoRoutes_Fares[2];
+	/* struct fareInfo Davao_Fares[2];
 
     strcpy(Davao_Fares[0].type_of_Jeep, "RegularJeep");
     Davao_Fares[0].baseFare = 13.0;
-    DavaoRoutes_Fares[0].additional = 1.80;
+    Davao_Fares[0].additional = 1.80;
 
-    strcpy(DavaoRoutes_Fares[1].type_of_Jeep, "AirconditionedJeep");
-    DavaoRoutes_Fares[1].baseFare = 15.0;
-    DavaoRoutes_Fares[1].additional = 1.80;
+    strcpy(Davao_Fares[1].type_of_Jeep, "AirconditionedJeep");
+    Davao_Fares[1].baseFare = 15.0;
+    Davao_Fares[1].additional = 1.80;
 
         DifferentType_Of_Jeep_Fair(Davao_Fares, 2); */
     
