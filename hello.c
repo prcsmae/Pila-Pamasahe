@@ -3,29 +3,24 @@
 #include <string.h>
 
 struct fareInfo {
-	char startPoint[50];
-	char endPoint[50];
-	double baseFare;
-	double additional;
-};
-// What if ito i struct prec?
-/* struct fareInfo{
 	char type_of_Jeep[20];
 	double baseFare;
-	double additional; */
-
-float calculateFare_for_regularJeep( double baseFare, double additional, int PWD_Discount, int SeniorCitizen_Discount, int Student_Discount) {
-    double baseFare = 13.0
-    double result = baseFare - 4.0;
-    double final_fare;
-
+	double additional; 
+};
+// Function to Calculate for Jeep Fare in Davao for regular and airconditioned jeep as well as the user's discount
+float calculateFare( float Users_Distance_From_A_To_B, float baseFare, float additional, float PWD, float SeniorCitizen, float Student) {
+    float result = Users_Distance_From_A_To_B - 4.0;
+    float final_fare;
+	double additional_fare; 
+// Calculating final fare base on the result calculation 
     if (result == 0) {
         final_fare = baseFare;
     }  if (result > 1) {
-        double additional_fare = result * 1.80;
+	 additional_fare = result * additional;
         final_fare = baseFare + additional_fare;
     }
-    
+	
+// Applying discounts if the user is eligible for discount(PWD, Students, Senior Citizen)   
     if (PWD_Discount, SeniorCitizen_Discount, Student_Discount){
          final_fare *= 0.8;
     }
@@ -34,13 +29,10 @@ float calculateFare_for_regularJeep( double baseFare, double additional, int PWD
 }
 
 int main(){
+// Store Fare Information
+struct fareInfo Davao_Fares[2];
 
-    struct FareInfo regularJeepney = {"Point A", "Point B", 13, 1.80}; // initialize variables
-    struct FareInfo airconJeepney = {"Point A", "Point B", 15, 1.80}; // initialize variables
-	
-	// Then ganito natin pag use sa struct para isa nalang function for regular and aircon na jeep
-	/* struct fareInfo Davao_Fares[2];
-
+// Fare Information for Regular and Airconditioned Jeep in Davao City 
     strcpy(Davao_Fares[0].type_of_Jeep, "RegularJeep");
     Davao_Fares[0].baseFare = 13.0;
     Davao_Fares[0].additional = 1.80;
@@ -49,7 +41,7 @@ int main(){
     Davao_Fares[1].baseFare = 15.0;
     Davao_Fares[1].additional = 1.80;
 
-        DifferentType_Of_Jeep_Fair(Davao_Fares, 2); */
+        DifferentType_Of_Jeep_Fare(Davao_Fares, 2); */
     
     return 0;
 }
