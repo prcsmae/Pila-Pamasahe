@@ -2,7 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Structure to store fare-related information
+#define MAX_JOURNEYS 10 // maximum amount of journeys allowed to be calculated
+
+/* Structure to store fare-related information
+   Save all the information to be displayed to the structure */
 struct FareInfo {
     char startPoint[50];
     char endPoint[50];
@@ -13,7 +16,7 @@ struct FareInfo {
     int numPassengers;
     int isDiscounted;
     double distance;
-}; // Save all the information to be displayed on to the structure
+};
 
 // Function to calculate the final fare
 double calculateFare(double distance, double baseFare, double additionalRate, int isDiscounted, int numPassengers) {
@@ -86,14 +89,13 @@ int main(){
                                 // Both points are left blank to make way for the user input
 
     // Variable Declaration
+    struct FareInfo *selectedJeepney;
+    struct FareInfo journeys[MAX_JOURNEYS]; // struct array to keep track of each journey
     char startPoint[50], endPoint[50], jeepneyType[20], isDiscountedStr[3];
     double distance;
     int isDiscounted, numPassengers;
-    struct FareInfo *selectedJeepney;
     double totalFare = 0.0;
-    int maxJourneys = 10; // Maximum number of journeys
-    int numPassengersArray[maxJourneys]; // Array to store the number of passengers for each journey
-    struct FareInfo journeys[maxJourneys]; // struct array to keep track of each journey
+    int numPassengersArray[MAX_JOURNEYS]; // Array to store the number of passengers for each journey
     int journeyCount = 0; // Variable to keep track of the number of journeys
 
     // Print Program Description
@@ -125,7 +127,7 @@ int main(){
         isDiscounted = (strcmp(isDiscountedStr, "Yes") == 0) ? 1 : 0; // Shorthand if-else
 
         // Select the fare information based on jeepney type
-        selectedJeepney = (strcmp(jeepneyType, "Regular") == 0) ? &regularJeepney : &airconJeepney;
+        selectedJeepney = (strcmp(jeepneyType, "Regular") == 0) ? &regularJeepney : &airconJeepney; // Since the variable is a pointer, the fare information is accessed by reference
 
         // Set the starting and ending points for the current journey
         strncpy((*selectedJeepney).startPoint, startPoint, sizeof((*selectedJeepney).startPoint) - 1);
@@ -133,10 +135,10 @@ int main(){
         		/* Specifies the maximum number of characters to copy and makes way for the terminating character */
         (*selectedJeepney).distance = distance; // Store the distance
 
-        // Calculate the final fare
+        // Calculate the final fare by calling on the calculateFare function
         (*selectedJeepney).finalFare = calculateFare(distance, (*selectedJeepney).baseFare, (*selectedJeepney).additionalRatePerKm, isDiscounted, numPassengers);
 
-        // Add the total fare cost
+        // Add the total fare cost if there are more than 1 journeys
         totalFare += (*selectedJeepney).finalFare;
 
    		// Store the journey information for easier tracking and saving to the file
@@ -151,7 +153,7 @@ int main(){
         // Display the final fare calculation for the current journey
         printf("\nThe fare for Journey %d from %s to %s is %.2lf for %d passenger/s.\n", journeyCount, (*selectedJeepney).startPoint, (*selectedJeepney).endPoint, (*selectedJeepney).finalFare, numPassengers);
 
-        // Write receipt information to file
+        // Write receipt information to file by calling the writeReceiptToFile function
         writeReceiptToFile(selectedJeepney, journeyCount, totalFare, numPassengersArray);
 
         // Ask if the user wants to calculate another fare
@@ -159,7 +161,7 @@ int main(){
         scanf("%s", isDiscountedStr);
         while (getchar() != '\n'); // Clear the buffer and ignore the newline
 
-    } while (strcmp(isDiscountedStr, "Yes") == 0 && journeyCount < maxJourneys);
+    } while (strcmp(isDiscountedStr, "Yes") == 0 && journeyCount < MAX_JOURNEYS);
 	/* Loop terminates once the user chooses not to calculate another fare and journey count is less than the max amount of journeys */
     	
     // Display receipt for the fare(s)
@@ -176,6 +178,7 @@ int main(){
         printf("Additional Fare: %.2lf\n", journeys[i].finalFare - journeys[i].baseFare);
         printf("Final Fare Cost: %.2lf\n", journeys[i].finalFare);
     }
+    // Display the total fare if the user calculated more than 1 fare
     if (journeyCount > 1) {
         printf("\nTotal fare cost for all calculations: %.2lf\n", totalFare);
     }
