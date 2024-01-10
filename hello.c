@@ -1,3 +1,8 @@
+/* CMSC 18 FINAL PROJECT - GROUP 3: Jomuad, Precious Mae E.	
+									Gabano, Jodi C.
+									Ceballos, Cristieneil J.
+									Serion, Chello G. 		  */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,13 +73,13 @@ void writeReceiptToFile(struct FareInfo *journey, int journeyCount, double total
     fprintf(file, "Student/Senior Citizen/PWD Discount: %s\n", ((*journey).isDiscounted) ? "Yes" : "No");
     fprintf(file, "Distance: %.2lf km\n", (*journey).distance);
     fprintf(file, "Number of Passengers: %d\n", numPassengersArray[journeyCount - 1]); // Retrieve number of passengers from the array
-    fprintf(file, "Base Fare: %.2lf\n", (*journey).baseFare);
-    fprintf(file, "Additional Fare: %.2lf\n", (*journey).finalFare - (*journey).baseFare);
-    fprintf(file, "Final Fare Cost: %.2lf\n", (*journey).finalFare);
+    fprintf(file, "Base Fare: ₱%.2lf\n", (*journey).baseFare);
+    fprintf(file, "Additional Fare: ₱%.2lf\n", (*journey).finalFare - (*journey).baseFare);
+    fprintf(file, "Final Fare Cost: ₱%.2lf\n", (*journey).finalFare);
 
     // Display total fare in the file if there is more than one journey
     if (journeyCount > 1) {
-        fprintf(file, "\nTotal fare cost for all calculations: %.2lf\n", totalFare);
+        fprintf(file, "\nTotal fare cost for all calculations: ₱%.2lf\n", totalFare);
         fprintf(file, "-------------------------------------------\n");
     }
 
@@ -151,21 +156,29 @@ int main(){
         journeyCount++;
 
         // Display the final fare calculation for the current journey
-        printf("\nThe fare for Journey %d from %s to %s is %.2lf for %d passenger/s.\n", journeyCount, (*selectedJeepney).startPoint, (*selectedJeepney).endPoint, (*selectedJeepney).finalFare, numPassengers);
+        printf("\nThe fare for Journey %d from %s to %s is ₱%.2lf for %d passenger/s.\n", journeyCount, (*selectedJeepney).startPoint, (*selectedJeepney).endPoint, (*selectedJeepney).finalFare, numPassengers);
 
         // Write receipt information to file by calling the writeReceiptToFile function
         writeReceiptToFile(selectedJeepney, journeyCount, totalFare, numPassengersArray);
+
+        // Check if the user has reached the maximum amount of journeys
+        if (journeyCount >= MAX_JOURNEYS) {
+            printf("\nMaximum Journeys Reached.\n");
+            break; // Exit the loop
+        }
 
         // Ask if the user wants to calculate another fare
         printf("\nDo you want to calculate another fare? (Yes or No): ");
         scanf("%s", isDiscountedStr);
         while (getchar() != '\n'); // Clear the buffer and ignore the newline
 
-    } while (strcmp(isDiscountedStr, "Yes") == 0 && journeyCount < MAX_JOURNEYS);
-	/* Loop terminates once the user chooses not to calculate another fare and journey count is less than the max amount of journeys */
-    	
+    } while (strcmp(isDiscountedStr, "Yes"));
+	/* Loop terminates once the user chooses not to calculate another fare */
+
     // Display receipt for the fare(s)
+    printf("\nPrinting Receipt...\n");
     printf("\n-------------------------------------------");
+    // Loop through the journeys array and display all the information
     for (int i = 0; i < journeyCount; i++) {
         printf("\nReceipt for Journey %d:\n", i + 1);
         printf("From: %s\n", journeys[i].startPoint);
@@ -174,13 +187,13 @@ int main(){
         printf("Student/Senior Citizen/PWD Discount: %s\n", (journeys[i].isDiscounted) ? "Yes" : "No");
         printf("Number of Passengers: %d\n", numPassengersArray[i]);
         printf("Distance: %.2lf km\n", journeys[i].distance);
-        printf("Base Fare: %.2lf\n", journeys[i].baseFare);
-        printf("Additional Fare: %.2lf\n", journeys[i].finalFare - journeys[i].baseFare);
-        printf("Final Fare Cost: %.2lf\n", journeys[i].finalFare);
+        printf("Base Fare: ₱%.2lf\n", journeys[i].baseFare);
+        printf("Additional Fare: ₱%.2lf\n", journeys[i].finalFare - journeys[i].baseFare);
+        printf("Final Fare Cost: ₱%.2lf\n", journeys[i].finalFare);
     }
     // Display the total fare if the user calculated more than 1 fare
     if (journeyCount > 1) {
-        printf("\nTotal fare cost for all calculations: %.2lf\n", totalFare);
+        printf("\nTotal fare cost for all calculations: ₱%.2lf\n", totalFare);
     }
     printf("-------------------------------------------\n");
 
