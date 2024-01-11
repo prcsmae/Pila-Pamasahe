@@ -11,7 +11,6 @@
 // Declaration of user-defined functions
 double calculateFare();
 void writeReceiptToFile();
-void getUserInput();
 
 /* Structure to store fare-related information
    Save all the information to be displayed to the structure */
@@ -31,11 +30,11 @@ int main() {
     // Initialize struct variables with fare information for regular and aircon jeepneys
     struct FareInfo regularJeepney = {"", "", "Regular", 13, 1.80, 0.0, 0, 0, 0.0};
     struct FareInfo airconJeepney = {"", "", "Aircon", 15, 1.80, 0.0, 0, 0, 0.0};
- 
+
     // Variable declaration
     struct FareInfo *selectedJeepney;
     struct FareInfo journeys[MAX_JOURNEYS]; // struct array to keep track of each journey
-    char startPoint[50], endPoint[50], jeepneyType[20], isDiscountedStr[3];
+    char startPoint[50], endPoint[50], jeepneyType[20] ="", isDiscountedStr[3];
     double distance;
     int isDiscounted, numPassengers;
     double totalFare = 0.0;
@@ -46,18 +45,84 @@ int main() {
     printf("\n---------------------------------------------------------\n");
 
     do {
-        // Calling on function to get user input
-        getUserInput(startPoint, endPoint, &distance, jeepneyType, isDiscountedStr, &numPassengers);
+        while(1){
+            printf("\nEnter the starting point (Point A): ");
+            if (scanf(" %49[^\n]", startPoint) != 1) {
+                printf("Invalid input. Please enter a valid starting point.\n");
+                while (getchar() != '\n'); // Clear the buffer
+                continue;
+            }
 
-        // Convert "Yes" or "No" to 1 or 0 for easier computation
-        isDiscounted = (strcmp(strlwr(isDiscountedStr), "yes") == 0) ? 1 : 0; // Shorthand if-else
+            printf("Enter the ending point (Point B): ");
+            if (scanf(" %49[^\n]", endPoint) != 1) {
+                printf("Invalid input. Please enter a valid ending point.\n");
+                while (getchar() != '\n'); // Clear the buffer
+                continue;
+            }
 
-        // Select the fare information based on jeepney type
-        selectedJeepney = (strcmp(strlwr(jeepneyType), "regular") == 0) ? &regularJeepney : &airconJeepney; // Since the variable is a pointer, the fare information is accessed by reference
+            do{
+                printf("Enter the distance between the two points (in km): ");
+                if (scanf("%lf", &distance) != 1 || distance < 0) {
+                    printf("Invalid input. Please enter a valid distance.\n");
+                    while (getchar() != '\n'); // Clear the buffer
+                    continue;
+                }
+                else{
+                    break;
+                }
+            } while(1);
+            // Handle input for jeepney type
+            do {
+                printf("Enter the type of jeepney (Regular or Aircon): ");
+                if (scanf(" %19[^\n]", jeepneyType) != 1) {
+                    printf("Invalid input. Please enter a valid jeepney type.\n");
+                    while (getchar() != '\n'); // Clear the buffer
+                    continue;
+                }
+                
+                if (strcmp(strlwr(jeepneyType), "regular") == 0 || strcmp(strlwr(jeepneyType), "aircon") == 0) {
+                    // Since the variable is a pointer, the fare information is accessed by reference
+                    selectedJeepney = (strcmp(strlwr(jeepneyType), "regular") == 0) ? &regularJeepney : &airconJeepney;
+                    break; // Exit the loop if valid input is received
+                } else {
+                    printf("Invalid input. Please enter either Regular or Aircon.\n");
+                }
+                
+            } while (1);
+            // Error handling for input
+            do {
+                printf("Are you a Student or Senior Citizen or PWD? (Yes or No): ");
+                if (scanf(" %3[^\n]", isDiscountedStr) != 1) {
+                    printf("Invalid input. Please enter a valid answer.\n");
+                    while (getchar() != '\n'); // Clear the buffer
+                    continue;
+                }
 
+                if (strcmp(strlwr(isDiscountedStr), "yes") == 0 || strcmp(strlwr(isDiscountedStr), "no") == 0) {
+                    // Convert "Yes" or "No" to 1 or 0 for easier computation
+                    isDiscounted = (strcmp(strlwr(isDiscountedStr), "yes") == 0) ? 1 : 0; // Shorthand if-else
+                    break; 
+                } else {
+                    printf("Invalid input. Please enter either Yes or No.\n");
+                }
+            } while (1);
+            // Error handling for input
+            do{
+                printf("Enter the Number of Passengers: ");
+                if (scanf("%d", &numPassengers) != 1 || numPassengers <= 0) {
+                    printf("Invalid input. Please enter a valid number of passengers.\n");
+                    while (getchar() != '\n'); // Clear the buffer
+                    continue;
+                } else{
+                    break;
+                }
+            } while (1);
+            break;
+        }
         // Set the starting and ending points for the current journey
         strncpy((*selectedJeepney).startPoint, startPoint, sizeof((*selectedJeepney).startPoint) - 1);
         strncpy((*selectedJeepney).endPoint, endPoint, sizeof((*selectedJeepney).endPoint) - 1);
+
         		/* Specifies the maximum number of characters to copy and makes way for the terminating character */
         (*selectedJeepney).distance = distance; // Store the distance
 
@@ -184,80 +249,3 @@ void writeReceiptToFile(struct FareInfo *journey, int journeyCount, double total
 
     fclose(file);
 }
-
-// Function to handle user input with error checking
-void getUserInput(char *startPoint, char *endPoint, double *distance, char *jeepneyType, char *isDiscountedStr, int *numPassengers) {
-    // Loop until valid input is received
-    while (1) {
-        printf("\nEnter the starting point (Point A): ");
-        if (scanf(" %49[^\n]", startPoint) != 1) {
-            printf("Invalid input. Please enter a valid starting point.\n");
-            while (getchar() != '\n'); // Clear the buffer
-            continue;
-        }
-
-        printf("Enter the ending point (Point B): ");
-        if (scanf(" %49[^\n]", endPoint) != 1) {
-            printf("Invalid input. Please enter a valid ending point.\n");
-            while (getchar() != '\n'); // Clear the buffer
-            continue;
-        }
-
-        do{
-            printf("Enter the distance between the two points (in km): ");
-            if (scanf("%lf", distance) != 1 || *distance < 0) {
-                printf("Invalid input. Please enter a valid distance.\n");
-                while (getchar() != '\n'); // Clear the buffer
-                continue;
-            }
-            else{
-                break;
-            }
-        } while(1);
-        // Handle input for jeepney type
-        do {
-            printf("Enter the type of jeepney (Regular or Aircon): ");
-            if (scanf(" %19s", jeepneyType) != 1) {
-                printf("Invalid input. Please enter a valid jeepney type.\n");
-                while (getchar() != '\n'); // Clear the buffer
-                continue;
-            }
-
-            if (strcmp(strlwr(jeepneyType), "regular") == 0 || strcmp(strlwr(jeepneyType), "aircon") == 0) {
-                break; // Exit the loop if valid input is received
-            } else {
-                printf("Invalid input. Please enter either Regular or Aircon.\n");
-            }
-        } while (1);
-
-        // Error handling for input
-         do {
-            printf("Are you a Student or Senior Citizen or PWD? (Yes or No): ");
-            if (scanf(" %3s", isDiscountedStr) != 1) {
-                printf("Invalid input. Please enter a valid answer.\n");
-                while (getchar() != '\n'); // Clear the buffer
-                continue;
-            }
-
-            if (strcmp(strlwr(isDiscountedStr), "yes") == 0 || strcmp(strlwr(isDiscountedStr), "no") == 0) {
-                break; 
-            } else {
-                printf("Invalid input. Please enter either Yes or No.\n");
-            }
-        } while (1);
-
-        // Error handling for input
-        do{
-            printf("Enter the Number of Passengers: ");
-            if (scanf("%d", numPassengers) != 1 || *numPassengers <= 0) {
-                printf("Invalid input. Please enter a valid number of passengers.\n");
-                while (getchar() != '\n'); // Clear the buffer
-                continue;
-            } else{
-                break;
-            }
-        } while (1);
-        break; 
-    }
-}
-
