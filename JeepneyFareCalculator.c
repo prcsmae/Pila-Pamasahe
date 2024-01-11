@@ -50,16 +50,16 @@ int main() {
         getUserInput(startPoint, endPoint, &distance, jeepneyType, isDiscountedStr, &numPassengers);
 
         // Convert "Yes" or "No" to 1 or 0 for easier computation
-        isDiscounted = (strcmp(strlwr(isDiscountedStr), "yes") == 0) ? 1 : 0;
+        isDiscounted = (strcmp(strlwr(isDiscountedStr), "yes") == 0) ? 1 : 0; // Shorthand if-else
 
-         // Select the fare information based on jeepney type
-        selectedJeepney = (strcmp(strlwr(jeepneyType), "regular") == 0) ? &regularJeepney : &airconJeepney;
+        // Select the fare information based on jeepney type
+        selectedJeepney = (strcmp(strlwr(jeepneyType), "regular") == 0) ? &regularJeepney : &airconJeepney; // Since the variable is a pointer, the fare information is accessed by reference
 
         // Set the starting and ending points for the current journey
         strncpy((*selectedJeepney).startPoint, startPoint, sizeof((*selectedJeepney).startPoint) - 1);
-        strncpy((*selectedJeepney).endPoint, endPoint, sizeof((*selectedJeepney).endPoint) - 1); 
-        // Store the distance
-        (*selectedJeepney).distance = distance;
+        strncpy((*selectedJeepney).endPoint, endPoint, sizeof((*selectedJeepney).endPoint) - 1);
+        		/* Specifies the maximum number of characters to copy and makes way for the terminating character */
+        (*selectedJeepney).distance = distance; // Store the distance
 
         // Calculate the final fare by calling on the calculateFare function
         (*selectedJeepney).finalFare = calculateFare(distance, (*selectedJeepney).baseFare, (*selectedJeepney).additionalRatePerKm, isDiscounted, numPassengers);
