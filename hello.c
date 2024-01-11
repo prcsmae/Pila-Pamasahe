@@ -7,15 +7,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-<<<<<<< HEAD
-void printReceipt();
-
-struct fareInfo {
-	char startPoint[50];
-	char endPoint[50];
-	double baseFare;
-	double additional;
-=======
 #define MAX_JOURNEYS 10 // maximum amount of journeys allowed to be calculated
 
 /* Structure to store fare-related information
@@ -30,7 +21,6 @@ struct FareInfo {
     int numPassengers;
     int isDiscounted;
     double distance;
->>>>>>> b229425b73be0007322d2bf8e2a24c86e2682d1b
 };
 
 // Function to calculate the final fare
@@ -98,10 +88,6 @@ void writeReceiptToFile(struct FareInfo *journey, int journeyCount, double total
 
 int main(){
 
-<<<<<<< HEAD
-    struct fareInfo regularJeepney = {"Point A", "Point B", 13, 1.80}; // initialize variables
-    struct fareInfo airconJeepney = {"Point A", "Point B", 15, 1.80}; // initialize variables
-=======
     // Initialize struct variables with fare information for regular and aircon jeepneys
     struct FareInfo regularJeepney = {"", "", "Regular", 13, 1.80, 0.0, 0, 0, 0.0};
     struct FareInfo airconJeepney = {"", "", "Aircon", 15, 1.80, 0.0, 0, 0, 0.0};
@@ -120,7 +106,6 @@ int main(){
     // Print Program Description
     printf("This Program Calculates The Jeepney Fare for Davao Routes.");
     printf("\n---------------------------------------------------------\n");
->>>>>>> b229425b73be0007322d2bf8e2a24c86e2682d1b
     
     // Using a loop to get user input
     do {
@@ -213,8 +198,4 @@ int main(){
     printf("-------------------------------------------\n");
 
     return 0;
-}
-
-void printReceipt(){
-
 }
