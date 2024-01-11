@@ -203,13 +203,17 @@ void getUserInput(char *startPoint, char *endPoint, double *distance, char *jeep
             continue;
         }
 
-        printf("Enter the distance between the two points (in km): ");
-        if (scanf("%lf", distance) != 1 || *distance < 0) {
-            printf("Invalid input. Please enter a valid distance.\n");
-            while (getchar() != '\n'); // Clear the buffer
-            continue;
-        }
-
+        do{
+            printf("Enter the distance between the two points (in km): ");
+            if (scanf("%lf", distance) != 1 || *distance < 0) {
+                printf("Invalid input. Please enter a valid distance.\n");
+                while (getchar() != '\n'); // Clear the buffer
+                continue;
+            }
+            else{
+                break;
+            }
+        } while(1);
         // Handle input for jeepney type
         do {
             printf("Enter the type of jeepney (Regular or Aircon): ");
@@ -243,13 +247,16 @@ void getUserInput(char *startPoint, char *endPoint, double *distance, char *jeep
         } while (1);
 
         // Error handling for input
-        printf("Enter the Number of Passengers: ");
-        if (scanf("%d", numPassengers) != 1 || *numPassengers <= 0) {
-            printf("Invalid input. Please enter a valid number of passengers.\n");
-            while (getchar() != '\n'); // Clear the buffer
-            continue;
-        }
-
+        do{
+            printf("Enter the Number of Passengers: ");
+            if (scanf("%d", numPassengers) != 1 || *numPassengers <= 0) {
+                printf("Invalid input. Please enter a valid number of passengers.\n");
+                while (getchar() != '\n'); // Clear the buffer
+                continue;
+            } else{
+                break;
+            }
+        } while (1);
         break; 
     }
 }

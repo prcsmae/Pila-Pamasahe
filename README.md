@@ -20,4 +20,3 @@ Based on these input data, the program will output in both the terminal and an e
 - Number of passengers
 - Distance
 - Fare Total (Base Fare, Additional Fare, Final Fare, and Total Fare (If more than one calculation))
-
