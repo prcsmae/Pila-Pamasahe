@@ -1,6 +1,11 @@
 # CMSC-18-Project
 GitHub repository for CMSC 18 Final Project
 
+Authors:    Jomuad, Precious Mae E.	
+			Gabano, Jodi C.
+            Ceballos, Cristieneil J.
+            Serion, Chello G. 
+
 Davao City's jeepney system lacks a standardized fare calculation method, resulting in confusion and disputes among passengers and drivers. The manual calculation process is error-prone and compromises safety. This project aims to mitigate these issues by developing a C-programmed Jeepney Fare Calculator, streamlining fare computation and improving the overall commuting experience in the city.
 
 The user will be asked different data to input that will be used by the program to calculate the total fare, namely:
