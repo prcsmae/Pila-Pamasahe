@@ -1,0 +1,26 @@
+
+-------------------------------------------
+
+Receipt for Journey 1:
+From: mintal
+To: matina
+Jeepney Type: Aircon
+Student/Senior Citizen/PWD Discount: No
+Distance: 7.00 km
+Number of Passengers: 1
+Base Fare: ₱15.00
+Additional Fare: ₱4.32
+Final Fare Cost: ₱19.32
+
+-------------------------------------------
+
+Receipt for Journey 1:
+From: h
+To: h
+Jeepney Type: Regular
+Student/Senior Citizen/PWD Discount: No
+Distance: 10.00 km
+Number of Passengers: 2
+Base Fare: ₱13.00
+Additional Fare: ₱34.60
+Final Fare Cost: ₱47.60
