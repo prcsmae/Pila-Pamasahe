@@ -196,7 +196,7 @@ double calculateFare(double distance, double baseFare, double additionalRate, in
     // Calculate additional fare based on the distance
     if (distance == 0) {
         finalFare = baseFare;
-    } else if (distance > 1) {
+    } else if (distance >= 1) {
         additionalFare = distance * additionalRate;
     }
 
